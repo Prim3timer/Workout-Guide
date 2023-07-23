@@ -1,6 +1,8 @@
-let clicker = document.getElementById("halter");
+
       let pauser = document.getElementById("halter");
       let rewind = document.getElementById("backer");
+      let clicker = document.getElementById('detector')
+      console.log(clicker)
 
       let subject = document.createElement("h2");
       // subject.style.color = 'rebeccapurple'
@@ -101,8 +103,10 @@ let clicker = document.getElementById("halter");
         complete: "no",
         runFunc: true,
       };
-
+     
+      let change = true
       function general(currentItem, formerItem) {
+       let time
         let { complete } = controls;
         complete = "no";
         return new Promise((resolve, reject) => {
@@ -121,8 +125,9 @@ let clicker = document.getElementById("halter");
           }, 3000);
           // transfrorm the current excercise element after 16 seconds
           // an interval to check for when sec exceeds 14
-          planks = setInterval(() => {}, 1000);
-
+          planks = setInterval(() => {
+          }, 10);
+          
           ID = window.setInterval(() => {
             if (sec > 14) {
               // the current excercise is currentItem
@@ -229,6 +234,7 @@ let clicker = document.getElementById("halter");
       rewind.addEventListener("pointerup", upInter);
 
       let reality = async () => {
+    
         controls.runFunc = false;
         try {
           await general(pressUp, jackKnife);
@@ -261,3 +267,16 @@ let clicker = document.getElementById("halter");
           }
         }
       };
+
+   
+      let changer = () => {
+        if (change === true){
+          change = false
+        }else {
+          change = true
+        }
+        console.log(change)
+      }
+
+      clicker.addEventListener('click', changer)
+
