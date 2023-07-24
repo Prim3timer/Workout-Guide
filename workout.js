@@ -105,8 +105,7 @@
       };
      
       let change = true
-      function general(currentItem, formerItem) {
-       let time
+      function general(currentItem, formerItem, time) {
         let { complete } = controls;
         complete = "no";
         return new Promise((resolve, reject) => {
@@ -173,7 +172,7 @@
               } else reject("not resolved");
               sec = 0;
             }
-          }, 1000);
+          }, time);
         });
       }
 
@@ -233,19 +232,23 @@
 
       rewind.addEventListener("pointerup", upInter);
 
-      let reality = async () => {
-    
+      let reality = async (time) => {
+        time = change === true? 1000 : 100
+        console.log(time)
+        setInterval(()=> {
+          
+        }, 2000)
         controls.runFunc = false;
         try {
-          await general(pressUp, jackKnife);
-
-          await general(squat, pressUp);
-
-          await general(running, squat);
-
-          await general(plank, running);
-
-          await general(jackKnife, plank);
+          await general(pressUp, jackKnife, time);
+          
+          await general(squat, pressUp, time);
+          
+          await general(running, squat, time);
+          
+          await general(plank, running, time);
+          
+          await general(jackKnife, plank, time);
         } catch (error) {
           console.log(error + " at all");
         } finally {
@@ -271,12 +274,15 @@
    
       let changer = () => {
         if (change === true){
+       
           change = false
         }else {
           change = true
         }
-        console.log(change)
+        console.log(change, time)
       }
-
+      
       clicker.addEventListener('click', changer)
-
+      
+      
+      
