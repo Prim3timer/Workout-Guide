@@ -103,7 +103,7 @@
         complete: "no",
         runFunc: true,
       };
-     
+     let time = 1000
       let change = true
       function general(currentItem, formerItem, time) {
         let { complete } = controls;
