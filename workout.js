@@ -1,6 +1,8 @@
-let clicker = document.getElementById("halter");
+
       let pauser = document.getElementById("halter");
       let rewind = document.getElementById("backer");
+      let clicker = document.getElementById('detector')
+      console.log(clicker)
 
       let subject = document.createElement("h2");
       // subject.style.color = 'rebeccapurple'
@@ -101,8 +103,9 @@ let clicker = document.getElementById("halter");
         complete: "no",
         runFunc: true,
       };
-
-      function general(currentItem, formerItem) {
+     let time = 1000
+      let change = true
+      function general(currentItem, formerItem, time) {
         let { complete } = controls;
         complete = "no";
         return new Promise((resolve, reject) => {
@@ -121,8 +124,9 @@ let clicker = document.getElementById("halter");
           }, 3000);
           // transfrorm the current excercise element after 16 seconds
           // an interval to check for when sec exceeds 14
-          planks = setInterval(() => {}, 1000);
-
+          planks = setInterval(() => {
+          }, 10);
+          
           ID = window.setInterval(() => {
             if (sec > 14) {
               // the current excercise is currentItem
@@ -168,7 +172,7 @@ let clicker = document.getElementById("halter");
               } else reject("not resolved");
               sec = 0;
             }
-          }, 1000);
+          }, time);
         });
       }
 
@@ -228,18 +232,23 @@ let clicker = document.getElementById("halter");
 
       rewind.addEventListener("pointerup", upInter);
 
-      let reality = async () => {
+      let reality = async (time) => {
+        time = change === true? 1000 : 100
+        console.log(time)
+        setInterval(()=> {
+          
+        }, 2000)
         controls.runFunc = false;
         try {
-          await general(pressUp, jackKnife);
-
-          await general(squat, pressUp);
-
-          await general(running, squat);
-
-          await general(plank, running);
-
-          await general(jackKnife, plank);
+          await general(pressUp, jackKnife, time);
+          
+          await general(squat, pressUp, time);
+          
+          await general(running, squat, time);
+          
+          await general(plank, running, time);
+          
+          await general(jackKnife, plank, time);
         } catch (error) {
           console.log(error + " at all");
         } finally {
@@ -261,3 +270,20 @@ let clicker = document.getElementById("halter");
           }
         }
       };
+
+   
+      let changer = () => {
+        if (change === true){
+       
+          change = false
+        }else {
+          change = true
+        }
+        console.log(change, time)
+      }
+      console.log('new branches')
+      
+      clicker.addEventListener('click', changer)
+      
+      
+      
