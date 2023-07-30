@@ -281,6 +281,7 @@
         }
         console.log(change, time)
       }
+      console.log('new branches')
       
       clicker.addEventListener('click', changer)
       
